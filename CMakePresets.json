@@ -1,0 +1,68 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "ninja",
+      "displayName": "Default Config",
+      "description": "Default build using Ninja generator",
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/build/ninja",
+      "environment": {
+        "MY_ENVIRONMENT_VARIABLE": "Test",
+        "PATH": "$env{HOME}/ninja/bin:$penv{PATH}"
+      }
+    },
+    {
+      "name": "VS",
+      "displayName": "Default Config",
+      "description": "Default build using Ninja generator",
+      "generator": "Visual Studio 16 2019",
+      "architecture": "x64",
+      "toolset": "v142",
+      "binaryDir": "${sourceDir}/build/VS"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ninja",
+      "configurePreset": "ninja"
+    },
+    {
+      "name": "VS",
+      "configurePreset": "VS"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "VS",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "VS"
+        },
+        {
+          "type": "build",
+          "name": "VS"
+        }
+      ]
+    },
+    {
+      "name": "ninja",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "ninja"
+        },
+        {
+          "type": "build",
+          "name": "ninja"
+        }
+      ]
+    }
+  ]
+}

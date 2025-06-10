@@ -1,0 +1,37 @@
+name: Build Windows
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+jobs:
+  build-windows:
+    runs-on: windows-2025
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules:  'false'
+        fetch-depth: 0
+        filter: 'tree:0' # Download all commits but blobs and trees on demand
+
+      # Using ccache on Windows requires the Ninja generator
+      # This action calls vcvarsall for us to setup the desired toolchain
+    - name: Setup MSVC toolchain
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
+        toolset: 14.29 # v141 / vs2019
+
+    - name: Build VS
+      run: |
+        cmake --workflow --preset VS
+      shell: cmd
+      
+    - name: Build Ninja
+      run: |
+        cmake --workflow --preset ninja
+      shell: cmd
+      
