@@ -25,9 +25,9 @@ jobs:
         arch: x64
         toolset: 14.29 # v141 / vs2019
 
-    - name: Build VS
+    - name: Build VS2022
       run: |
-        cmake --workflow --preset VS
+        cmake --workflow --preset VS2022
       shell: cmd
       
     - name: Build Ninja
