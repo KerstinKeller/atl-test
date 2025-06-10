@@ -32,7 +32,7 @@
       "description": "VS 2022 build",
       "generator": "Visual Studio 17 2022",
       "architecture": "x64",
-      "toolset": "v142",
+      "toolset": "v143",
       "binaryDir": "${sourceDir}/build/VS2022"
     }
     
